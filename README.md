@@ -49,3 +49,44 @@ Using a CAPTCHAsolving service like 2Captcha or AntiCaptcha with Selenium can he
 
 
 ```
+
+## Implemention Setups 
+
+### Encapsulate Driver functionalities in MyChromeDriver and MyFirefoxDriver
+```
+
+1. Start chrome/firefox service using manager of Chrome and Firefox.
+2. Disable automation flags of Chrome and Firefox.
+3. Add Proxy
+4. Http header information and user agent information.
+5. Using Cookies 
+  i. Add cookies
+  ii. Get cookies
+6. Adding any browser extension
+```
+
+## Getting Started
+
+### Virtual Environment
+```
+python -m venv env
+```
+#### Activate the virtual environment
+##### Linux Environment
+```
+source ./env/bin/activate
+```
+##### Windows Environment
+```
+.\env\Script\activate
+```
+### installing requirements 
+ ```
+pip install -r requirements.txt
+ ```
+
+ #### Start Bot 
+
+ ```
+ python main.py
+ ```
