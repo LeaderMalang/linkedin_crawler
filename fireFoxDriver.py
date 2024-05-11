@@ -2,13 +2,18 @@ from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 class CustomFirefoxDriver(Firefox):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user_agents=None,*args, **kwargs):
         options = kwargs.pop('options', None) or FirefoxOptions()
         options.set_preference("dom.webdriver.enabled", False)
         options.set_preference('useAutomationExtension', False)
 
         super().__init__(*args, options=options, **kwargs)
-
+    def rotate_user_agent(self):
+        """Rotates the User-Agent from the pre-defined list by setting a new one."""
+        new_user_agent = random.choice(self.user_agents)
+        self.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": new_user_agent})
+        print(f"User-Agent rotated to: {new_user_agent}")
+    
     def add_cookie(self, cookie_dict):
         """
         Adds a single cookie to your current session.

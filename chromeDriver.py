@@ -2,13 +2,16 @@ from selenium.webdriver import  Chrome
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 class MyChromeDriver(Chrome):
 
-  def __init__(self, *args, **kwargs):
+  def __init__(self,user_agents=None,  *args, **kwargs):
     
     proxy = kwargs.pop('proxy', None) 
-    
+    self.user_agents = user_agents or ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"]
+
     options = kwargs.pop('options', None) or ChromeOptions()
     #set Proxy options
     chrome_options.add_argument('--proxy-server=%s:%s' % (proxy[0], proxy[1]))
+    #user agents
+    options.add_argument(f"user-agent={random.choice(self.user_agents)}")
     # Set custom options to disable automation flags
     options.add_experimental_option("useAutomationExtension", False)
     options.add_argument("--disable-infobars")
