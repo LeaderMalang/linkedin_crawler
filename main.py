@@ -8,14 +8,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 from chromeDriver import MyChromeDriver
-def login_to_linkedin_with_proxy(email, password, proxy_host, proxy_port):
+def login_to_linkedin_with_proxy(driver,email, password):
     
-    service = ChromeService(ChromeDriverManager().install())
+    
     
     try:
-        driver = MyChromeDriver(service=service, options=chrome_options)
         
-        driver.get("https://www.linkedin.com/")
         
         email_field = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "session_key")))
     
@@ -49,4 +47,26 @@ password = "shah1122"
 proxy_host = "203.124.53.122"
 proxy_port = 5678
 
-login_to_linkedin_with_proxy(email, password, proxy_host, proxy_port)
+# login_to_linkedin_with_proxy(email, password, proxy_host, proxy_port)
+
+
+
+service = ChromeService(ChromeDriverManager().install())
+# Instantiate your custom Chrome driver.
+driver = CustomChromeDriver(service=service)
+
+# Define credentials and login URL.
+login_url = 'https://www.linkedin.com/'
+credentials = {'email': email, 'password': shah1122}
+
+# Perform login and get cookies afterward.
+cookies = driver.login_and_save_cookies(login_url, login_to_linkedin_with_proxy, **credentials)
+
+# Add cookies to the driver.
+driver.add_cookies(cookies)
+
+# Get an individual cookie by name.
+specific_cookie = driver.get_cookie('session_cookie_name')
+
+# Get all cookies.
+all_cookies = driver.get_all_cookies()

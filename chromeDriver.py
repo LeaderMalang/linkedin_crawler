@@ -57,9 +57,9 @@ class MyChromeDriver(Chrome):
                                followed by any *login_args. 
         :param login_args: Arguments necessary to perform the login provided to login_function.
     """
-        # Navigate to the login page
+    # Navigate to the login page
     self.get(login_url)
-        # Execute the login action, passing this driver instance and any other login args
+    # Execute the login action, passing this driver instance and any other login args
     login_function(self, *login_args)
         # Save cookies after login
     return self.get_all_cookies()
