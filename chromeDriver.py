@@ -18,7 +18,11 @@ class MyChromeDriver(Chrome):
     options.add_argument("--disable-blink-features=AutomationControlled")
     super().__init__(*args, **kwargs)
 
-  
+  def rotate_user_agent(self):
+        """Rotates the User-Agent from the pre-defined list by setting a new one."""
+        new_user_agent = random.choice(self.user_agents)
+        self.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": new_user_agent})
+        print(f"User-Agent rotated to: {new_user_agent}")
 
   def add_cookie(self, cookie_dict):
     """
