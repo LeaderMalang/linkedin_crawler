@@ -1,5 +1,6 @@
 from selenium.webdriver import  Chrome
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+import random
 class MyChromeDriver(Chrome):
 
   def __init__(self,user_agents=None,  *args, **kwargs):
@@ -9,7 +10,7 @@ class MyChromeDriver(Chrome):
 
     options = kwargs.pop('options', None) or ChromeOptions()
     #set Proxy options
-    chrome_options.add_argument('--proxy-server=%s:%s' % (proxy[0], proxy[1]))
+    # options.add_argument('--proxy-server=%s:%s' % (proxy[0], proxy[1]))
     #user agents
     options.add_argument(f"user-agent={random.choice(self.user_agents)}")
     # Set custom options to disable automation flags
@@ -55,7 +56,7 @@ class MyChromeDriver(Chrome):
     """
     return super().get_cookies()
 
-  def login_and_save_cookies(self, login_url, login_function, *login_args):
+  def login_and_save_cookies(self, login_url, login_function, **login_args):
     """
         Perform login and then save the cookies post-login.
         :param login_url: The URL to navigate to for login.

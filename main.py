@@ -58,12 +58,12 @@ user_agents = [
 
 service = ChromeService(ChromeDriverManager().install())
 # Instantiate your custom Chrome driver.
-driver = CustomChromeDriver(service=service,user_agents=user_agents)
+driver = MyChromeDriver(service=service,user_agents=user_agents)
 # This will set a random User-Agent from the list
 driver.rotate_user_agent()  
 # Define credentials and login URL.
 login_url = 'https://www.linkedin.com/'
-credentials = {'email': email, 'password': shah1122}
+credentials = {"email": email, 'password': password}
 
 # Perform login and get cookies afterward.
 cookies = driver.login_and_save_cookies(login_url, login_to_linkedin_with_proxy, **credentials)
