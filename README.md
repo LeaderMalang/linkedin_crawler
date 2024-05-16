@@ -84,7 +84,19 @@ source ./env/bin/activate
  ```
 pip install -r requirements.txt
  ```
+### Update Environment Variables 
+ ```
+LINKEDIN_LOGIN_URL=
+LINKEDIN_EMAIL=
+LINKEDIN_PASSWORD=
+PROXY_PORT=
+PROXY_HOST=
+PROXY_USERNAME=
+PROXY_PASSWORD=
+CHROME_EXTENSION_URL=
+FIREFOX_EXTENSION_URL=
 
+ ```
  #### Start Bot 
 
  ```
