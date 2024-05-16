@@ -1,17 +1,45 @@
-from selenium.webdriver import Firefox
+# from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
+import random
+from seleniumwire.webdriver import Firefox
 
-class CustomFirefoxDriver(Firefox):
-    def __init__(self, user_agents=None,*args, **kwargs):
+import requests
+class MyFirefoxDriver(Firefox):
+    def __init__(self, user_agents=None,proxy=None,profile=None,*args, **kwargs):
+
+        selopt = {}
+        user_proxy=None
+        if proxy is not None and proxy["host"] and proxy["port"]:
+
+            if "username" in proxy and "password" in proxy:
+                user_proxy = f"{proxy['username']}:{proxy['password']}@{proxy['host']}:{proxy['port']}"
+            else:
+                user_proxy = f"{proxy['host']}:{proxy['port']}"
+            selopt = {
+                'proxy': {
+                    'http': f'http://{user_proxy}',
+                    'https': f'https://{user_proxy}',
+                }
+            }
+        self.profile=profile
+        self.extension_name=None
+        # if extension_url is not None:
+        #     self.extension_name=self.download_extension(extension_url)
+        #     self.install_addon(self.extension_name, temporary=True)
+        self.user_agents = user_agents or ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"]
+
         options = kwargs.pop('options', None) or FirefoxOptions()
         options.set_preference("dom.webdriver.enabled", False)
         options.set_preference('useAutomationExtension', False)
-
+        options.profile = profile
+        #,seleniumwire_options=selopt
         super().__init__(*args, options=options, **kwargs)
     def rotate_user_agent(self):
         """Rotates the User-Agent from the pre-defined list by setting a new one."""
         new_user_agent = random.choice(self.user_agents)
-        self.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": new_user_agent})
+        self.profile.set_preference("general.useragent.override", new_user_agent)
+        
+        # self.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": new_user_agent})
         print(f"User-Agent rotated to: {new_user_agent}")
     
     def add_cookie(self, cookie_dict):
@@ -59,5 +87,11 @@ class CustomFirefoxDriver(Firefox):
         login_function(self, *login_args)
         # Save cookies after login
         return self.get_all_cookies()
-
+    def download_extension(self,extension_url):
+        response = requests.get(extension_url)
+        name='extension.xpi'
+        with open(name, 'wb') as f:
+            f.write(response.content)
+        print("Extension downloaded successfully.")
+        return name
 # Usage of the CustomFirefoxDriver for login and cookie management would be identical to the example provided for CustomChromeDriver.
