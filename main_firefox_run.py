@@ -10,15 +10,9 @@ import time
 import os
 from fireFoxDriver import MyFirefoxDriver
 from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
-import logging
-from webdriver_manager.core.logger import set_logger
+from logger import set_logger
 
-logger = logging.getLogger("custom_logger")
-logger.setLevel(logging.DEBUG)
-logger.addHandler(logging.StreamHandler())
-logger.addHandler(logging.FileHandler("custom.log"))
-
-set_logger(logger)
+set_logger()
 
 
 
