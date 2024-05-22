@@ -4,7 +4,6 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 import os
 from fireFoxDriver import MyFirefoxDriver
-from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 from logger import set_logger
 from linkedin import login_to_linkedin_with_proxy
 set_logger()
@@ -27,14 +26,13 @@ service = FirefoxService(GeckoDriverManager().install())
 extension_url = os.environ['FIREFOX_EXTENSION_URL']
 
 
-# Set up Firefox profile
-profile = FirefoxProfile()
+
 
 # Initialize the driver with the loaded extension
 driver = MyFirefoxDriver(service=service, user_agents=user_agents,proxy={
    "host": proxy_host,
    "port":proxy_port
-},profile=profile)
+})
 path_addon=os.path.abspath(os.path.join(os.getcwd(), "extension.xpi"))
 # extension_name=driver.download_extension(extension_url)
 driver.install_addon("C:\\Users\\ACS\\AppData\\Local\\Temp\\extension.xpi", temporary=True)

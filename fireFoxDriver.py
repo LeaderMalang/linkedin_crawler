@@ -1,26 +1,26 @@
-# from selenium.webdriver import Firefox
+from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 import random
-from seleniumwire.webdriver import Firefox
+
 
 import requests
 class MyFirefoxDriver(Firefox):
-    def __init__(self, user_agents=None,proxy=None,profile=None,*args, **kwargs):
+    def __init__(self, user_agents=None,*args, **kwargs):
 
-        selopt = {}
-        user_proxy=None
-        if proxy is not None and proxy["host"] and proxy["port"]:
+        # selopt = {}
+        # user_proxy=None
+        # if proxy is not None and proxy["host"] and proxy["port"]:
 
-            if "username" in proxy and "password" in proxy:
-                user_proxy = f"{proxy['username']}:{proxy['password']}@{proxy['host']}:{proxy['port']}"
-            else:
-                user_proxy = f"{proxy['host']}:{proxy['port']}"
-            selopt = {
-                'proxy': {
-                    'http': f'http://{user_proxy}',
-                    'https': f'https://{user_proxy}',
-                }
-            }
+        #     if "username" in proxy and "password" in proxy:
+        #         user_proxy = f"{proxy['username']}:{proxy['password']}@{proxy['host']}:{proxy['port']}"
+        #     else:
+        #         user_proxy = f"{proxy['host']}:{proxy['port']}"
+        #     selopt = {
+        #         'proxy': {
+        #             'http': f'http://{user_proxy}',
+        #             'https': f'https://{user_proxy}',
+        #         }
+        #     }
         self.profile=profile
         self.extension_name=None
         # if extension_url is not None:
