@@ -5,10 +5,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from chromeDriver import MyChromeDriver
 
-from logger import set_logger
+from logger import set_logging
 from linkedin import login_to_linkedin_with_proxy
 import os
-set_logger()
+set_logging()
 
 
 

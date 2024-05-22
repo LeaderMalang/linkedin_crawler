@@ -4,9 +4,9 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 import os
 from fireFoxDriver import MyFirefoxDriver
-from logger import set_logger
+from logger import set_logging
 from linkedin import login_to_linkedin_with_proxy
-set_logger()
+set_logging()
 
 
 
