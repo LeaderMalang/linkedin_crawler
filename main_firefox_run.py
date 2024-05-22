@@ -29,14 +29,11 @@ extension_url = os.environ['FIREFOX_EXTENSION_URL']
 
 
 # Initialize the driver with the loaded extension
-driver = MyFirefoxDriver(service=service, user_agents=user_agents,proxy={
-   "host": proxy_host,
-   "port":proxy_port
-})
-path_addon=os.path.abspath(os.path.join(os.getcwd(), "extension.xpi"))
-# extension_name=driver.download_extension(extension_url)
-driver.install_addon("C:\\Users\\ACS\\AppData\\Local\\Temp\\extension.xpi", temporary=True)
-print('Successfully added extension!')
+driver = MyFirefoxDriver(service=service, user_agents=user_agents,is_enable_auto_flags=False)
+# path_addon=os.path.abspath(os.path.join(os.getcwd(), "extension.xpi"))
+# # extension_name=driver.download_extension(extension_url)
+# driver.install_addon("C:\\Users\\ACS\\AppData\\Local\\Temp\\extension.xpi", temporary=True)
+# print('Successfully added extension!')
 # Rotate user agents
 driver.rotate_user_agent()  
 

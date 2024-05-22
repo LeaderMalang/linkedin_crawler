@@ -1,27 +1,16 @@
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 import random
-
-
 import requests
+
 class MyFirefoxDriver(Firefox):
-    def __init__(self, user_agents=None,*args, **kwargs):
+    def __init__(self, user_agents=None,is_enable_auto_flags=True,*args, **kwargs):
 
         # selopt = {}
         # user_proxy=None
         # if proxy is not None and proxy["host"] and proxy["port"]:
 
-        #     if "username" in proxy and "password" in proxy:
-        #         user_proxy = f"{proxy['username']}:{proxy['password']}@{proxy['host']}:{proxy['port']}"
-        #     else:
-        #         user_proxy = f"{proxy['host']}:{proxy['port']}"
-        #     selopt = {
-        #         'proxy': {
-        #             'http': f'http://{user_proxy}',
-        #             'https': f'https://{user_proxy}',
-        #         }
-        #     }
-        self.profile=profile
+        
         self.extension_name=None
         # if extension_url is not None:
         #     self.extension_name=self.download_extension(extension_url)
@@ -29,10 +18,11 @@ class MyFirefoxDriver(Firefox):
         self.user_agents = user_agents or ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"]
 
         options = kwargs.pop('options', None) or FirefoxOptions()
-        options.set_preference("dom.webdriver.enabled", False)
-        options.set_preference('useAutomationExtension', False)
-        options.profile = profile
-        #,seleniumwire_options=selopt
+        if is_enable_auto_flags:
+            options.set_preference("dom.webdriver.enabled", False)
+            options.set_preference('useAutomationExtension', False)
+        
+        
         super().__init__(*args, options=options, **kwargs)
     def rotate_user_agent(self):
         """Rotates the User-Agent from the pre-defined list by setting a new one."""
