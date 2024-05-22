@@ -2,7 +2,7 @@
 from selenium.webdriver.chrome.service import Service as ChromeService
 
 from webdriver_manager.chrome import ChromeDriverManager
-import time
+
 from chromeDriver import MyChromeDriver
 
 from logger import set_logger
