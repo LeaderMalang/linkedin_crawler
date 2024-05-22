@@ -1,17 +1,13 @@
-from selenium.common.exceptions import NoSuchElementException
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 from chromeDriver import MyChromeDriver
 
 from logger import set_logger
 from linkedin import login_to_linkedin_with_proxy
-
+import os
 set_logger()
 
 

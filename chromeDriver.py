@@ -5,7 +5,7 @@ import requests
 import os
 class MyChromeDriver(Chrome):
 
-  def __init__(self,user_agents=None, extension_url=None, *args, **kwargs):
+  def __init__(self,user_agents=None, extension_url=None,is_enable_auto_flags=True, *args, **kwargs):
     
     proxy = kwargs.get('proxy', None) 
     # extension_url = kwargs.get('extension_url', None) 
@@ -22,9 +22,10 @@ class MyChromeDriver(Chrome):
     #user agents
     options.add_argument(f"user-agent={random.choice(self.user_agents)}")
     # Set custom options to disable automation flags
-    options.add_experimental_option("useAutomationExtension", False)
-    options.add_argument("--disable-infobars")
-    options.add_argument("--disable-blink-features=AutomationControlled")
+    if is_enable_auto_flags:
+      options.add_experimental_option("useAutomationExtension", False)
+      options.add_argument("--disable-infobars")
+      options.add_argument("--disable-blink-features=AutomationControlled")
     if self.extension_name is not None:
        
       options.add_argument(f"--load-extension={os.path.abspath(os.path.join(os.getcwd(), self.extension_name))}")
