@@ -17,17 +17,17 @@ class MyFirefoxDriver(Firefox):
         #     self.install_addon(self.extension_name, temporary=True)
         self.user_agents = user_agents or ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"]
 
-        options = kwargs.pop('options', None) or FirefoxOptions()
+        self.options = kwargs.pop('options', None) or FirefoxOptions()
         if is_enable_auto_flags:
-            options.set_preference("dom.webdriver.enabled", False)
-            options.set_preference('useAutomationExtension', False)
+            self.options.set_preference("dom.webdriver.enabled", False)
+            self.options.set_preference('useAutomationExtension', False)
         
         
-        super().__init__(*args, options=options, **kwargs)
+        super().__init__(*args, options=self.options, **kwargs)
     def rotate_user_agent(self):
         """Rotates the User-Agent from the pre-defined list by setting a new one."""
         new_user_agent = random.choice(self.user_agents)
-        self.profile.set_preference("general.useragent.override", new_user_agent)
+        self.options.set_preference("general.useragent.override", new_user_agent)
         
         # self.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": new_user_agent})
         print(f"User-Agent rotated to: {new_user_agent}")
